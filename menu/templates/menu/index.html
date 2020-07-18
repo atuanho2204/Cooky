@@ -1,0 +1,67 @@
+{% load static %}
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'menu/style.css' %}">
+    {% block css %}
+        <link rel="stylesheet" href="{% static 'menu/style.css' %}">
+      <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.1/css/materialize.min.css" integrity="sha256-qj3p6P1fJIV+Ndv7RW1ovZI2UhOuboj9GcODzcNFIN8=" crossorigin="anonymous" />
+    {% endblock css %}
+    <style>
+        body {
+          background-image: url('http://127.0.0.1:8000/photo/photo/background.jpeg');
+          background-repeat: no-repeat;
+          background-attachment: fixed;
+          background-size: 100% 100%;
+        }
+
+    </style>
+</head>
+<body>
+<div>
+    <nav>
+        <div class="nav-wrapper teal lighten-2">
+            <a href="#!" class="brand-logo m4 l2"><i class="material-icons ml-4">cloud</i>Cooky</a>
+            <ul class="right hide-on-med-and-down">
+                <li><a href="sass.html"><i class="material-icons col s4">search</i></a></li>
+                <li><a href="badges.html">Login</a></li>
+                <li><a href="collapsible.html">SignUp</a></li>
+                <li><a href="{% url 'log-out' %}">Logout</a></li>
+            </ul>
+        </div>
+    </nav>
+    <div class="row">
+        <div class="container">
+            <div class="col s6 offset-s3">
+                {% for food in foods %}
+                    <div class="card large hoverable">
+                        <div class="card-image waves-effect waves-block waves-light" style="height: 100%;">
+                            <div class="imgContainer">
+                                <img src="{{ food.picture.url}}" style='height: 100%; width: 100%; object-fit: cover'>
+                            </div>
+                        </div>
+
+                        <div class="card-content teal lighten-4 center-align">
+                            <div class="card-title">{{ food.title }}</div>
+                            <p>{{ food.introduction | truncatechars:50}}</p>
+                        </div>
+
+                        <div class="card-action">
+                            <div class="wrap">
+                                <a href="/" class="btn">Edit</a>
+                                <a href="/" class="btn right">Delete</a>
+                            </div>
+                        </div>
+
+                    </div>
+
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
