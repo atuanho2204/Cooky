@@ -7,13 +7,15 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
 from django.shortcuts import HttpResponseRedirect
 from .models import Food
+
+
 # Create your views here.
 
 def index(request) :
     return render(request, "menu/index.html")
 
 def base(request) :
-    return render(request, "menu/index.html")
+    return render(request, "menu/hello.html")
 
 class IndexClass(View) :
     def get(self, request):
@@ -33,7 +35,7 @@ class LoginClass(View) :
             login(request, my_user)
             foods = Food.objects.all()
             context = {'foods': foods}
-            return render(request, 'menu/index.html', context)
+            return render(request, 'menu/foodmenu.html', context)
 
 class ViewUser(LoginRequiredMixin, View):
     login_url = '/menu/login/'
@@ -57,7 +59,10 @@ def logout_view(request):
     return HttpResponseRedirect('login')
 
 
-def food_card(request):
+def food_menu(request):
     foods = Food.objects.all()
     context = {'foods': foods}
-    return render(request, 'menu/index.html', context)
+    return render(request, 'menu/foodmenu.html', context)
+
+def food_card(request):
+    return render(request, 'menu/foodcard.html')

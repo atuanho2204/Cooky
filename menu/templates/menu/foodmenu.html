@@ -1,0 +1,47 @@
+{% extends 'menu/index.html' %}
+
+{% block foodmenu %}
+
+
+    <div class="row">
+        <div class="container">
+            <div class="col s6 offset-s3">
+                {% for food in foods %}
+                    <div class="card large hoverable">
+                        <a href="foodcard.action" id="foodCard">
+                            <div id="foodId" data-=""></div>
+                            <div class="card-image waves-effect waves-block waves-light" style="height: 100%;">
+                                <div class="imgContainer">
+                                    <img src="{{ food.picture.url}}" style='height: 100%; width: 100%; object-fit: cover'>
+                                </div>
+                            </div>
+
+                            <div class="card-content teal lighten-4 center-align">
+                                <div class="card-title">{{ food.title }}</div>
+                                <p>{{ food.introduction | truncatechars:50}}</p>
+                            </div>
+                        </a>
+                        <div class="card-action">
+                            <div class="wrap">
+                                <a href="/" class="btn col s4 offset-s4">Add</a>
+                            </div>
+                        </div>
+
+                    </div>
+
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+
+    <script>
+        $(function() {
+            $("#employeeLink").on("click",function(e) {
+                e.preventDefault(); // cancel the link itself
+                $.post(this.href,function(data) {
+                    $(".card-title").html(data);
+                });
+            });
+        });
+    </script>
+{% endblock %}
