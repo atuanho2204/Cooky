@@ -26,7 +26,7 @@
     <div>
         <nav>
             <div class="nav-wrapper teal lighten-2">
-                <a href="#!" class="brand-logo m4 l2"><i class="material-icons ml-4">cloud</i>Cooky</a>
+                <a href="{% url 'index' %}" class="brand-logo m4 l2"><i class="material-icons ml-4">cloud</i>Cooky</a>
                 <ul class="right hide-on-med-and-down">
                     <li><a href="sass.html"><i class="material-icons col s4">search</i></a></li>
                     <li><a href="badges.html">Login</a></li>
@@ -39,6 +39,9 @@
         {% endblock %}
 
         {% block foodcard %}
+        {% endblock %}
+
+        {% block 404page %}
         {% endblock %}
     </div>
 
@@ -90,7 +93,13 @@
     console.log("CSRF: ", csrftoken)
 
 </script>
+<script>
+        if ( window.history.replaceState ) {
+          window.history.replaceState( null, null, window.location.href );
+        }
 
+
+</script>
 
 
 </body>

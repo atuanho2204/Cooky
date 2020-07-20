@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.views import View
-from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth import authenticate, login, logout, decorators
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
@@ -24,7 +24,10 @@ class IndexClass(View) :
 
 class LoginClass(View) :
     def get(self, request):
-        return render(request, 'menu/login.html')
+        if request.user.is_authenticated:
+            return food_menu(request)
+        else:
+            return render(request, 'menu/login.html')
     def post(self, request):
         user_name = request.POST.get('user-name')
         pass_word = request.POST.get('pass-word')
@@ -58,12 +61,14 @@ def logout_view(request):
     logout(request)
     return HttpResponseRedirect('login')
 
-
 def food_menu(request):
     foods = Food.objects.all()
     context = {'foods': foods}
     return render(request, 'menu/foodmenu.html', context)
 
+#@decorators.login_required(login_url='/menu/login/')
 def food_card(request,id):
     foods = Food.objects.all().filter(food_id=id)
     return render(request, 'menu/foodcard.html', {'foods': foods})
+
+
