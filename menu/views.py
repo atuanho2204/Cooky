@@ -7,7 +7,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
 from django.shortcuts import HttpResponseRedirect
 from .models import Food
-
+import json
 
 # Create your views here.
 
@@ -64,5 +64,6 @@ def food_menu(request):
     context = {'foods': foods}
     return render(request, 'menu/foodmenu.html', context)
 
-def food_card(request):
-    return render(request, 'menu/foodcard.html')
+def food_card(request,id):
+    foods = Food.objects.all().filter(food_id=id)
+    return render(request, 'menu/foodcard.html', {'foods': foods})
