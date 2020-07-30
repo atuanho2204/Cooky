@@ -19,4 +19,3 @@ class Food(models.Model):
     picture = models.ImageField(upload_to='photo', blank=True)
 
 
-

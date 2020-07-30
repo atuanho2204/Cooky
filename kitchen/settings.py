@@ -23,7 +23,7 @@ BASE_DIR = os.path.dirname(__file__)
 SECRET_KEY = '9@msc5epw%@f2w4=t57#0ibk^kau7bn09(gys1$s%50c2c8bhn'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['127.0.0.1']
 
@@ -130,3 +130,4 @@ MEDIA_URL = '/photo/'
 SESSION_EXPIRE_AT_BROWSER_CLOSE = True
 SESSION_COOKIE_AGE = 1209600
 CSRF_COOKIE_HTTPONLY = False
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')

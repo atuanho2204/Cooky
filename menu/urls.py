@@ -10,4 +10,5 @@ urlpatterns = [
     path('index/', views.food_menu, name='index'),
     path('signup/', views.signup, name='signup'),
     path('', views.logout_view, name='log-out'),
+    path('404page', views.error, name='404page')
 ]

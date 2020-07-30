@@ -71,4 +71,6 @@ def food_card(request,id):
     foods = Food.objects.all().filter(food_id=id)
     return render(request, 'menu/foodcard.html', {'foods': foods})
 
+def error(request):
+    return render(request, 'menu/404.html')
 
