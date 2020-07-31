@@ -6,7 +6,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
 from django.shortcuts import HttpResponseRedirect
-from .models import Food
+from .models import Food, Weekly
 import json
 
 # Create your views here.
@@ -62,15 +62,44 @@ def logout_view(request):
     return HttpResponseRedirect('login')
 
 def food_menu(request):
-    foods = Food.objects.all()
-    context = {'foods': foods}
-    return render(request, 'menu/foodmenu.html', context)
+    if not request.user.is_authenticated:
+        return redirect('login')
+    else:
+        foods = Food.objects.all()
+        context = {'foods': foods}
+        return render(request, 'menu/foodmenu.html', context)
 
 #@decorators.login_required(login_url='/menu/login/')
 def food_card(request,id):
-    foods = Food.objects.all().filter(food_id=id)
-    return render(request, 'menu/foodcard.html', {'foods': foods})
+    if not request.user.is_authenticated:
+        return redirect('login')
+    else:
+        foods = Food.objects.all().filter(food_id=id)
+        return render(request, 'menu/foodcard.html', {'foods': foods})
 
 def error(request):
     return render(request, 'menu/404.html')
+
+class Profile(View):
+    def get(self, request):
+        if request.user.is_authenticated:
+            current_user = request.user
+            hello = "123"
+            schedule = Weekly.objects.get(week_id=current_user)
+            week = {
+                'monday': schedule.monday,
+                'tuesday': schedule.tuesday,
+                'wednesday': schedule.wednesday,
+                'thursday': schedule.thursday,
+                'friday': schedule.friday,
+                'saturday': schedule.saturday,
+                'sunday': schedule.sunday,
+            }
+
+            foods = Food.objects.all()
+            context = {'foods': foods, 'schedule': week}
+            return render(request, 'menu/profile.html', context)
+        else:
+            return render(request, 'menu/login.html')
+
 

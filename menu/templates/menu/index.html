@@ -29,6 +29,7 @@
                 <a href="{% url 'index' %}" class="brand-logo m4 l2"><i class="material-icons ml-4">cloud</i>Cooky</a>
                 <ul class="right hide-on-med-and-down">
                     <li><a href="{% url '404page' %}"><i class="material-icons col s4">search</i></a></li>
+                    <li><a href="{% url 'profile' %}">Profile</a></li>
                     <li><a href="{% url '404page' %}">Login</a></li>
                     <li><a href="{% url '404page' %}">SignUp</a></li>
                     <li><a href="{% url 'log-out' %}">Logout</a></li>
@@ -39,6 +40,9 @@
         {% endblock %}
 
         {% block foodcard %}
+        {% endblock %}
+
+        {% block profile %}
         {% endblock %}
 
         {% block 404page %}

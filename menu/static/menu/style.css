@@ -1,6 +1,10 @@
 h1{
     color: green;
 }
+td p{
+    color: red;
+}
+
 .nav-wrapper {
     color: #4db6ac teal lighten-2;
     height: 500px;
@@ -34,3 +38,7 @@ h1{
     text-align: center;
     font-size: 1em;
 }
+table#meal-plan th {
+    width: 25%;
+}
+

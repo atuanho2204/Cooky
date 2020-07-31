@@ -1,5 +1,5 @@
 from django.db import models
-
+from django.contrib.auth.models import User
 # Create your models here.
 
 class Question(models.Model):
@@ -17,5 +17,19 @@ class Food(models.Model):
     introduction = models.TextField(max_length=300, default='')
     description = models.TextField(default='')
     picture = models.ImageField(upload_to='photo', blank=True)
+
+class Weekly(models.Model):
+    week_id = models.OneToOneField(User, on_delete=models.CASCADE)
+    monday = models.ForeignKey(Food, on_delete=models.CASCADE, null=True, related_name='monday')
+    tuesday = models.ForeignKey(Food, on_delete=models.CASCADE, null=True, related_name='tuesday')
+    wednesday = models.ForeignKey(Food, on_delete=models.CASCADE, null=True, related_name='wednesday')
+    thursday = models.ForeignKey(Food, on_delete=models.CASCADE, null=True, related_name='thursday')
+    friday = models.ForeignKey(Food, on_delete=models.CASCADE, null=True, related_name='friday')
+    saturday = models.ForeignKey(Food, on_delete=models.CASCADE, null=True, related_name='saturday')
+    sunday = models.ForeignKey(Food, on_delete=models.CASCADE, null=True, related_name='sunday')
+
+
+    
+
 
 
