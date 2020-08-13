@@ -80,7 +80,7 @@ def food_card(request,id):
 def error(request):
     return render(request, 'menu/404.html')
 
-class Profile(View):
+class Plans(View):
     def get(self, request):
         if request.user.is_authenticated:
             current_user = request.user
@@ -98,8 +98,9 @@ class Profile(View):
 
             foods = Food.objects.all()
             context = {'foods': foods, 'schedule': week}
-            return render(request, 'menu/profile.html', context)
+            return render(request, 'menu/Plans.html', context)
         else:
             return render(request, 'menu/login.html')
 
-
+def profile(request):
+    return render(request, 'menu/profile.html')

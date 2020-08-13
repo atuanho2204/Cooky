@@ -1,0 +1,88 @@
+{% extends 'menu/index.html' %}
+
+{% load static %}
+
+{% block plans %}
+    <div class="row">
+        <div class="col s8" style="position: fixed; height: 60%;">
+            <table style="height: 100%; font-size: 1.5em;">
+                <tr>
+
+                    <th>Monday</th>
+                    <th>Tuesday</th>
+                    <th>Wednesday</th>
+                    <th>Thursday</th>
+                </tr>
+                <tr id="meal-plan" style="height: 30%;">
+                    <td><p> {{ schedule.monday.title }} </p></td>
+                    <td><p> {{ schedule.tuesday.title }} </p></td>
+                    <td><p> {{ schedule.wednesday.title }} </p></td>
+                    <td><p> {{ schedule.thursday.title }} </p></td>
+                </tr>
+                <tr>
+
+                    <th>Friday</th>
+                    <th>Saturday</th>
+                    <th>Sunday</th>
+                    <th>Shopping day</th>
+                </tr>
+                <tr id="meal-plan" style="height: 30%;">
+                    <td><p> {{ schedule.friday.title }} </p></td>
+                    <td><p> {{ schedule.saturday.title }} </p></td>
+                    <td><p> {{ schedule.sunday.title }} </p></td>
+                    <td><p>  </p></td>
+                </tr>
+            </table>
+        </div>
+        <div class="col s4" style="float: right;">
+            {% for food in foods %}
+            <div class="card large hoverable" draggable="true" ondragstart="return dragStart(event)">
+                <a href="/menu/index/foodcard/{{ food.food_id }}">
+                    <div id="foodId" data-="{{ food.id }}"></div>
+                    <div class="card-image waves-effect waves-block waves-light" style="height: 100%;">
+                        <div class="imgContainer">
+                            <img src="{{ food.picture.url}}" style='height: 100%; width: 100%; object-fit: cover'>
+                        </div>
+                    </div>
+
+                    <div class="card-content teal lighten-5 center-align">
+                        <div class="card-title"><p>{{ food.title }}</p></div>
+                        <p>{{ food.introduction | truncatechars:50}}</p>
+                    </div>
+                </a>
+                <div class="card-action">
+                    <div class="wrap">
+                        <a href="{% url '404page' %}" class="btn col s4 offset-s4">Add</a>
+                    </div>
+                </div>
+
+            </div>
+
+            {% endfor %}
+        </div>
+    </div>
+    <script type="text/javascript">
+         function dragStart(ev) {
+            ev.dataTransfer.effectAllowed='move';
+            ev.dataTransfer.setData("Text", ev.target.getAttribute('id'));
+            ev.dataTransfer.setDragImage(ev.target,0,0);
+            return true;
+         }
+         function dragEnter(ev) {
+            event.preventDefault();
+            return true;
+         }
+         function dragOver(ev) {
+            return false;
+         }
+         function dragDrop(ev) {
+            var src = ev.dataTransfer.getData("Text");
+            ev.target.appendChild(document.getElementById(src));
+            ev.stopPropagation();
+            return false;
+         }
+      </script>
+      <script>
+
+      </script>
+{% endblock %}

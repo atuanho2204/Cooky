@@ -3,86 +3,39 @@
 {% load static %}
 
 {% block profile %}
-    <div class="row">
-        <div class="col s8" style="position: fixed; height: 60%;">
-            <table style="height: 100%; font-size: 1.5em;">
-                <tr>
+<div class="row">
+    <div class="col s12 m4 offset-m4">
+        <div class="card">
+            <div class="card-content">
+                <form method="post" action="{% url 'login' %}">
+                    {% csrf_token %}
+                    <div class="form-field">
+                        <label>user-gender</label>
+                        <input type="checkbox" name="gender"
+                               value="1"/>Male
+                        <input type="checkbox" name="gender"
+                               value="2"/>Female
 
-                    <th>Monday</th>
-                    <th>Tuesday</th>
-                    <th>Wednesday</th>
-                    <th>Thursday</th>
-                </tr>
-                <tr id="meal-plan" style="height: 30%;">
-                    <td><p> {{ schedule.monday.title }} </p></td>
-                    <td><p> {{ schedule.tuesday.title }} </p></td>
-                    <td><p> {{ schedule.wednesday.title }} </p></td>
-                    <td><p> {{ schedule.thursday.title }} </p></td>
-                </tr>
-                <tr>
-
-                    <th>Friday</th>
-                    <th>Saturday</th>
-                    <th>Sunday</th>
-                    <th>Shopping day</th>
-                </tr>
-                <tr id="meal-plan" style="height: 30%;">
-                    <td><p> {{ schedule.friday.title }} </p></td>
-                    <td><p> {{ schedule.saturday.title }} </p></td>
-                    <td><p> {{ schedule.sunday.title }} </p></td>
-                    <td><p>  </p></td>
-                </tr>
-            </table>
-        </div>
-        <div class="col s4" style="float: right;">
-            {% for food in foods %}
-            <div class="card large hoverable" draggable="true" ondragstart="return dragStart(event)">
-                <a href="/menu/index/foodcard/{{ food.food_id }}">
-                    <div id="foodId" data-="{{ food.id }}"></div>
-                    <div class="card-image waves-effect waves-block waves-light" style="height: 100%;">
-                        <div class="imgContainer">
-                            <img src="{{ food.picture.url}}" style='height: 100%; width: 100%; object-fit: cover'>
-                        </div>
                     </div>
-
-                    <div class="card-content teal lighten-5 center-align">
-                        <div class="card-title"><p>{{ food.title }}</p></div>
-                        <p>{{ food.introduction | truncatechars:50}}</p>
+                    <br>
+                    <div class="form-field">
+                        <label>user-weight</label>
+                        <input type="text" name="user-weight">
                     </div>
-                </a>
-                <div class="card-action">
-                    <div class="wrap">
-                        <a href="{% url '404page' %}" class="btn col s4 offset-s4">Add</a>
-                    </div>
-                </div>
+                    <br>
 
+                    <div class="form-field">
+                        <label>user-height</label>
+                        <input type="text" name="user-height">
+                    </div>
+                    <br>
+                    <div class="form-field">
+                        <button class="btn-large waves-effect waves-dark" style="width:100%;">Submit</button>
+                    </div>
+                    <br>
+                </form>
             </div>
-
-            {% endfor %}
         </div>
     </div>
-    <script type="text/javascript">
-         function dragStart(ev) {
-            ev.dataTransfer.effectAllowed='move';
-            ev.dataTransfer.setData("Text", ev.target.getAttribute('id'));
-            ev.dataTransfer.setDragImage(ev.target,0,0);
-            return true;
-         }
-         function dragEnter(ev) {
-            event.preventDefault();
-            return true;
-         }
-         function dragOver(ev) {
-            return false;
-         }
-         function dragDrop(ev) {
-            var src = ev.dataTransfer.getData("Text");
-            ev.target.appendChild(document.getElementById(src));
-            ev.stopPropagation();
-            return false;
-         }
-      </script>
-      <script>
-
-      </script>
+</div>
 {% endblock %}
