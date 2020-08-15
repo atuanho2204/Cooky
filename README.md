@@ -1,5 +1,5 @@
 # Cooky
- A Django web app for college student that assist for weekly meals planning and provide cooking instructions.
+ A Django web app for college students to help them for weekly meals planning and provide cooking instructions.
  It collects user's BMI information, analyzes and stores in database.
  Calculate the nutritional value of the recipe. 
 ## Installation:
