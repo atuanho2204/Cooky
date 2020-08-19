@@ -20,6 +20,6 @@
 ## Built with
     Django ^8.0.20
     python3 ^3.8.1
-    Nutritionix API
+
     
     
